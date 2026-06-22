@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Idos>
+  <Ido>
+    <Name>LSC_CofRoHSReport</Name>
+    <Desc>LSC Certificate of RoHS Shipment Report</Desc>
+    <BaseTable></BaseTable>
+    <ExtensionAssembly>LSC.Extensions</ExtensionAssembly>
+    <ExtensionClass>LSC.Extensions.LSC_CofRoHSReportExtensionClass</ExtensionClass>
+
+    <!-- ═══════════════════════════════════════════════════
+         Properties — match the SELECT columns returned by
+         Rpt_LSC_CofRoHSReportSp via the #Results temp table
+         ═══════════════════════════════════════════════════ -->
+    <Props>
+      <Prop>
+        <Name>CoNum</Name>
+        <Desc>Customer Order Number</Desc>
+        <DataType>string</DataType>
+        <Length>10</Length>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>CoNum</ColName>
+      </Prop>
+      <Prop>
+        <Name>CoLine</Name>
+        <Desc>Customer Order Line</Desc>
+        <DataType>short</DataType>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>CoLine</ColName>
+      </Prop>
+      <Prop>
+        <Name>CoReleaseS</Name>
+        <Desc>Customer Order Release</Desc>
+        <DataType>short</DataType>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>CoReleaseS</ColName>
+      </Prop>
+      <Prop>
+        <Name>Item</Name>
+        <Desc>Item Number</Desc>
+        <DataType>string</DataType>
+        <Length>30</Length>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>item</ColName>
+      </Prop>
+      <Prop>
+        <Name>Description</Name>
+        <Desc>Item Description</Desc>
+        <DataType>string</DataType>
+        <Length>40</Length>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>description</ColName>
+      </Prop>
+      <Prop>
+        <Name>Rev</Name>
+        <Desc>Item Revision</Desc>
+        <DataType>string</DataType>
+        <Length>8</Length>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>rev</ColName>
+      </Prop>
+      <Prop>
+        <Name>CurDate</Name>
+        <Desc>Ship Date</Desc>
+        <DataType>datetime</DataType>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>curDate</ColName>
+      </Prop>
+      <Prop>
+        <Name>Qty</Name>
+        <Desc>Quantity Shipped</Desc>
+        <DataType>decimal</DataType>
+        <Precision>19</Precision>
+        <Scale>8</Scale>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>qty</ColName>
+      </Prop>
+      <Prop>
+        <Name>CustNum</Name>
+        <Desc>Customer Number</Desc>
+        <DataType>string</DataType>
+        <Length>7</Length>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>cust_num</ColName>
+      </Prop>
+      <Prop>
+        <Name>CustName</Name>
+        <Desc>Customer Name</Desc>
+        <DataType>string</DataType>
+        <Length>60</Length>
+        <Editable>false</Editable>
+        <Required>false</Required>
+        <ColName>custName</ColName>
+      </Prop>
+    </Props>
+
+    <!-- ═══════════════════════════════════════════════════
+         Method — mirrors Rpt_LSC_CofRoHSReportSp signature
+         ═══════════════════════════════════════════════════ -->
+    <Methods>
+      <Method>
+        <Name>Rpt_LSC_CofRoHSReportSp</Name>
+        <Desc>Load RoHS shipment report data for the specified CO line/release</Desc>
+        <ExtensionMethod>Rpt_LSC_CofRoHSReportSp</ExtensionMethod>
+        <Parms>
+          <Parm>
+            <Name>CoNum</Name>
+            <Desc>Customer Order Number</Desc>
+            <DataType>string</DataType>
+            <Length>10</Length>
+            <Direction>Input</Direction>
+            <Optional>true</Optional>
+          </Parm>
+          <Parm>
+            <Name>CoLine</Name>
+            <Desc>Customer Order Line</Desc>
+            <DataType>short</DataType>
+            <Direction>Input</Direction>
+            <Optional>true</Optional>
+          </Parm>
+          <Parm>
+            <Name>CoRelease</Name>
+            <Desc>Customer Order Release</Desc>
+            <DataType>short</DataType>
+            <Direction>Input</Direction>
+            <Optional>true</Optional>
+          </Parm>
+          <Parm>
+            <Name>pSite</Name>
+            <Desc>Site</Desc>
+            <DataType>string</DataType>
+            <Direction>Input</Direction>
+            <Optional>true</Optional>
+          </Parm>
+          <Parm>
+            <Name>Results</Name>
+            <Desc>Returned report data set</Desc>
+            <DataType>dataset</DataType>
+            <Direction>InputOutput</Direction>
+            <Optional>false</Optional>
+          </Parm>
+          <Parm>
+            <Name>Infobar</Name>
+            <Desc>Error or informational message</Desc>
+            <DataType>string</DataType>
+            <Direction>Output</Direction>
+            <Optional>false</Optional>
+          </Parm>
+        </Parms>
+      </Method>
+    </Methods>
+
+  </Ido>
+</Idos>

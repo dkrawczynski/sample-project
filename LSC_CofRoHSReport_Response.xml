@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  IDO Method Invocation Response
+  IDO    : LSC_CofRoHSReport
+  Method : Rpt_LSC_CofRoHSReportSp
+
+  ReturnCode: 0  = success
+              16 = error (see Infobar for message)
+
+  The Results parameter contains a .NET DataSet serialised as a DiffGram.
+  Column names and types match the SELECT aliases in the extension class inline query.
+-->
+<IDOResponses>
+
+  <IDOResponse
+      idoName="LSC_CofRoHSReport"
+      methodName="Rpt_LSC_CofRoHSReportSp">
+
+    <!-- 0 = success; 16 = error -->
+    <ReturnCode>0</ReturnCode>
+
+    <Parameters>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           Results — DataSet returned by the extension class inline query.
+           Schema matches the SELECT column aliases in the C# extension class.
+           Multiple <Table> elements appear when more than one shipment exists.
+           ═══════════════════════════════════════════════════════════════ -->
+      <Parameter name="Results" type="dataset" direction="inputoutput">
+
+        <DataSet>
+
+          <!-- Inline XSD schema — describes the shape of the returned table -->
+          <xs:schema
+              id="Results"
+              xmlns=""
+              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            <xs:element name="Results" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="Table">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="CoNum"       type="xs:string"   minOccurs="0" />
+                        <xs:element name="CoLine"      type="xs:short"    minOccurs="0" />
+                        <xs:element name="CoReleaseS"  type="xs:short"    minOccurs="0" />
+                        <xs:element name="item"        type="xs:string"   minOccurs="0" />
+                        <xs:element name="description" type="xs:string"   minOccurs="0" />
+                        <xs:element name="rev"         type="xs:string"   minOccurs="0" />
+                        <xs:element name="curDate"     type="xs:dateTime" minOccurs="0" />
+                        <xs:element name="qty"         type="xs:decimal"  minOccurs="0" />
+                        <xs:element name="cust_num"    type="xs:string"   minOccurs="0" />
+                        <xs:element name="custName"    type="xs:string"   minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
+
+          <!-- DiffGram payload — current state of the result rows -->
+          <diffgr:diffgram
+              xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+              xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+
+            <Results>
+
+              <!-- Example row 1 -->
+              <Table diffgr:id="Table1" msdata:rowOrder="0">
+                <CoNum>S0000001  </CoNum>
+                <CoLine>1</CoLine>
+                <CoReleaseS>1</CoReleaseS>
+                <item>WIDGET-A          </item>
+                <description>Widget Assembly RoHS Compliant    </description>
+                <rev>A       </rev>
+                <curDate>2026-06-10T00:00:00</curDate>
+                <qty>50.00000000</qty>
+                <cust_num>C000001</cust_num>
+                <custName>Acme Corporation                              </custName>
+              </Table>
+
+              <!-- Example row 2 (second shipment against same line/release) -->
+              <Table diffgr:id="Table2" msdata:rowOrder="1">
+                <CoNum>S0000001  </CoNum>
+                <CoLine>1</CoLine>
+                <CoReleaseS>1</CoReleaseS>
+                <item>WIDGET-A          </item>
+                <description>Widget Assembly RoHS Compliant    </description>
+                <rev>A       </rev>
+                <curDate>2026-06-15T00:00:00</curDate>
+                <qty>25.00000000</qty>
+                <cust_num>C000001</cust_num>
+                <custName>Acme Corporation                              </custName>
+              </Table>
+
+            </Results>
+
+          </diffgr:diffgram>
+
+        </DataSet>
+
+      </Parameter>
+
+      <!-- Infobar — empty on success; contains error message when ReturnCode > 0 -->
+      <Parameter name="Infobar" type="string" direction="output"></Parameter>
+
+    </Parameters>
+
+  </IDOResponse>
+
+</IDOResponses>

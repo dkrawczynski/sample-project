@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  IDO Method Invocation Request
+  IDO    : LSC_CofRoHSReport
+  Method : Rpt_LSC_CofRoHSReportSp
+
+  POST to: https://<server>/IDORequestService/RequestService.aspx
+  Header : Content-Type: text/xml; charset=utf-8
+           SCSSessionID: <token from AuthService>
+-->
+<IDORequests>
+
+  <IDORequest
+      type="invoke"
+      idoName="LSC_CofRoHSReport"
+      methodName="Rpt_LSC_CofRoHSReportSp">
+
+    <Parameters>
+
+      <!-- Input: Customer Order Number (CoNumType — leading 'S' and padding applied by the extension class) -->
+      <Parameter
+          name="CoNum"
+          type="string"
+          direction="input">S0000001  </Parameter>
+
+      <!-- Input: Customer Order Line (CoLineType — SmallInt) -->
+      <Parameter
+          name="CoLine"
+          type="int16"
+          direction="input">1</Parameter>
+
+      <!-- Input: Customer Order Release (CoReleaseType — SmallInt) -->
+      <Parameter
+          name="CoRelease"
+          type="int16"
+          direction="input">1</Parameter>
+
+      <!-- Input: Site (SiteType — retained for API compatibility; session context managed by IDO runtime) -->
+      <Parameter
+          name="pSite"
+          type="string"
+          direction="input">SL</Parameter>
+
+      <!-- InputOutput: DataSet placeholder — send empty element; populated in response -->
+      <Parameter
+          name="Results"
+          type="dataset"
+          direction="inputoutput" />
+
+      <!-- Output: Infobar — send empty element; populated in response on error -->
+      <Parameter
+          name="Infobar"
+          type="string"
+          direction="output" />
+
+    </Parameters>
+
+  </IDORequest>
+
+</IDORequests>
