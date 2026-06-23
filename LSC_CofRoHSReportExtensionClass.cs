@@ -33,7 +33,7 @@ namespace LSC.Extensions
                 {
                     CoNum = "S" + CoNum;
                 }
-                CoNum = (CoNum ?? string.Empty).PadRight(CoNumTypeLength);
+                CoNum = (CoNum ?? string.Empty).PadRight(CoNumTypeLength).Substring(0, CoNumTypeLength);
 
                 const string sql = @"
                     SELECT

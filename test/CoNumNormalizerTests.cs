@@ -16,32 +16,31 @@ internal static class CoNumNormalizer
         {
             coNum = "S" + coNum;
         }
-        return (coNum ?? string.Empty).PadRight(CoNumTypeLength);
+        return (coNum ?? string.Empty).PadRight(CoNumTypeLength).Substring(0, CoNumTypeLength);
     }
 }
 
-[TestFixture]
 public class CoNumNormalizerTests
 {
     [Test]
     public void Normalize_WhenCoNumLacksSPrefix_PrependsSPrefix()
     {
         string result = CoNumNormalizer.Normalize("0000001");
-        Assert.That(result.TrimEnd(), Is.EqualTo("S0000001"));
+        Assert.That(result, Is.EqualTo("S0000001  "));
     }
 
     [Test]
     public void Normalize_WhenCoNumAlreadyHasUppercaseSPrefix_DoesNotDoublePrefix()
     {
         string result = CoNumNormalizer.Normalize("S0000001");
-        Assert.That(result.TrimEnd(), Is.EqualTo("S0000001"));
+        Assert.That(result, Is.EqualTo("S0000001  "));
     }
 
     [Test]
     public void Normalize_WhenCoNumHasLowercaseSPrefix_DoesNotDoublePrefix()
     {
         string result = CoNumNormalizer.Normalize("s0000001");
-        Assert.That(result.TrimEnd(), Is.EqualTo("s0000001"));
+        Assert.That(result, Is.EqualTo("s0000001  "));
     }
 
     [Test]
@@ -73,12 +72,11 @@ public class CoNumNormalizerTests
         Assert.That(result.Length, Is.EqualTo(CoNumNormalizer.CoNumTypeLength));
     }
 
-    // Verifies padding fills remaining space with spaces, not zeros or other characters
     [Test]
     public void Normalize_PaddingCharacterIsSpace()
     {
         string result = CoNumNormalizer.Normalize("S1");
-        Assert.That(result, Does.EndWith(new string(' ', 7)));
+        Assert.That(result, Is.EqualTo("S1".PadRight(CoNumNormalizer.CoNumTypeLength)));
     }
 
     [TestCase("0000001",    "S0000001  ", TestName = "AddsSAndPads")]
@@ -86,6 +84,7 @@ public class CoNumNormalizerTests
     [TestCase("s0000001",   "s0000001  ", TestName = "KeepsLowercaseSAndPads")]
     [TestCase("000000001",  "S000000001", TestName = "NineDigitsGetsSAndFitsExactly")]
     [TestCase("S000000001", "S000000001", TestName = "TenCharsWithSUnchanged")]
+    [TestCase("0000000001", "S000000000", TestName = "TenDigitsGetsSAndTruncatesToTen")]
     public void Normalize_ProducesExpectedOutput(string input, string expected)
     {
         Assert.That(CoNumNormalizer.Normalize(input), Is.EqualTo(expected));
